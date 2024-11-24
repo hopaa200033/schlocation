@@ -22,6 +22,28 @@
       text-align: center;
       color: #333;
     }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .form-group button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .form-group button:hover {
+      background-color: #0056b3;
+    }
     .school-list {
       list-style-type: none;
       padding: 0;
@@ -44,31 +66,41 @@
 <body>
   <div class="container">
     <h1>School Management</h1>
+    <div class="form-group">
+      <label for="schoolName">School Name:</label>
+      <input type="text" id="schoolName" placeholder="Enter school name">
+    </div>
+    <div class="form-group">
+      <label for="schoolWebsite">School Website:</label>
+      <input type="text" id="schoolWebsite" placeholder="Enter school website">
+    </div>
+    <div class="form-group">
+      <button onclick="addSchool()">Save</button>
+    </div>
     <ul class="school-list" id="schoolList">
       <!-- Schools will be dynamically added here -->
     </ul>
   </div>
 
   <script>
-    // Sample data for schools
-    const schools = [
-      { name: 'School A', website: 'https://schoola.com' },
-      { name: 'School B', website: 'https://schoolb.com' },
-      { name: 'School C', website: 'https://schoolc.com' }
-    ];
+    // Function to add a new school
+    function addSchool() {
+      const schoolName = document.getElementById('schoolName').value;
+      const schoolWebsite = document.getElementById('schoolWebsite').value;
 
-    // Function to render schools
-    function renderSchools() {
-      const schoolList = document.getElementById('schoolList');
-      schools.forEach(school => {
+      if (schoolName && schoolWebsite) {
+        const schoolList = document.getElementById('schoolList');
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${school.name}</strong>: <a href="${school.website}" target="_blank">${school.website}</a>`;
+        li.innerHTML = `<strong>${schoolName}</strong>: <a href="${schoolWebsite}" target="_blank">${schoolWebsite}</a>`;
         schoolList.appendChild(li);
-      });
-    }
 
-    // Render schools on page load
-    renderSchools();
+        // Clear the input fields
+        document.getElementById('schoolName').value = '';
+        document.getElementById('schoolWebsite').value = '';
+      } else {
+        alert('Please enter both school name and website.');
+      }
+    }
   </script>
 </body>
 </html>
